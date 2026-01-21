@@ -1,4 +1,4 @@
 name: UHC
 version: '1.0-SNAPSHOT'
-main: com.a.uHC.UHC
+main: com.aqua.uhc.UHC
 api-version: '1.21'

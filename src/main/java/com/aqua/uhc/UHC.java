@@ -6,7 +6,7 @@ public final class UHC extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("UHC 플러그인이 활성화 되었습니다!"); // 정보, 경고
+        getLogger().info("UHC 플러그인이 활성화 되었습니다!");
     }
 
     @Override
