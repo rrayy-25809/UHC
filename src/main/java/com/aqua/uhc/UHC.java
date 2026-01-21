@@ -1,11 +1,16 @@
 package com.aqua.uhc;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class UHC extends JavaPlugin {
+    private worldborder border_manager;
 
     @Override
     public void onEnable() {
+        Bukkit.getWorlds().forEach((world) -> {
+            border_manager = new worldborder(this, world);
+        });
         getLogger().info("UHC 플러그인이 활성화 되었습니다!");
     }
 
