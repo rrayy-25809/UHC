@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/UHC1.iml" filepath="$PROJECT_DIR$/.idea/UHC1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UHC.iml" filepath="$PROJECT_DIR$/.idea/modules/UHC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UHC.main.iml" filepath="$PROJECT_DIR$/.idea/modules/UHC.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UHC.test.iml" filepath="$PROJECT_DIR$/.idea/modules/UHC.test.iml" />
     </modules>
   </component>
 </project>
