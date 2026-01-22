@@ -29,7 +29,7 @@ public class event implements Listener {
 
         Material resultMaterial = null;
         float expToDrop = 0;
-        float amount = 1f;
+        int amount = 1;
 
         // 2. 광물 종류 판정
         switch (block.getType()) {
@@ -50,7 +50,7 @@ public class event implements Listener {
             case DEEPSLATE_COPPER_ORE:
                 resultMaterial = Material.COPPER_INGOT;
                 expToDrop = 0.7f;
-                amount = 2.0f;
+                amount = 2;
                 break;
             case OAK_LEAVES: //사과 드랍
             case SPRUCE_LEAVES:
@@ -64,7 +64,7 @@ public class event implements Listener {
             case AZALEA_LEAVES:
             case FLOWERING_AZALEA_LEAVES:
                 resultMaterial = Material.APPLE;
-                amount = 0.05f;
+                amount = (random.nextInt(10) < 1)? 1 : 0; // 1/10 확률
                 break;
             default:
                 return;
@@ -72,12 +72,12 @@ public class event implements Listener {
         if (resultMaterial != null) {
             event.setDropItems(false); // 기존 아이템 드롭 방지
 
-                // 3. 행운(Fortune) 로직 계산
-                int fortuneLevel = itemInHand.getEnchantmentLevel(Enchantment.FORTUNE);
+            // 3. 행운(Fortune) 로직 계산
+            int fortuneLevel = itemInHand.getEnchantmentLevel(Enchantment.FORTUNE);
 
                 if (fortuneLevel > 0 && block.getType() != Material.ANCIENT_DEBRIS) {
                     int r = random.nextInt(fortuneLevel + 2);
-                    amount = Math.max(1.0f, r);
+                    amount = Math.max(1, r)*amount;
                 }
 
             // 4. 아이템 및 경험치 드롭
