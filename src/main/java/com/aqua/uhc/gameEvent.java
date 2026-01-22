@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.ExperienceOrb;
@@ -11,10 +12,38 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class event implements Listener {
+import net.kyori.adventure.text.Component;
+
+public class gameEvent implements Listener {
     private final Random random = new Random();
+    private World gameWorld;
+    private int player_amount = 0;
+    private int player_amount_when_start = 0;
+
+    public gameEvent(World gameWorld) {
+        this.gameWorld = gameWorld;
+        this.player_amount_when_start = gameWorld.getPlayers().size();
+    }
+
+    @EventHandler
+    public void onPlayerKilled(PlayerDeathEvent event) {
+        event.deathMessage(null); // 기존 메시지 없애기
+        Player player = event.getPlayer();
+        gameWorld.getPlayers().forEach((gamePlayer) -> {
+            if (gamePlayer.getGameMode() == GameMode.SURVIVAL) {
+                player_amount += 1;
+            }
+        });
+        gameWorld.sendMessage(Component.text("플레이어, "+player.getName()+"이 사망하였습니다. ("+player_amount+"/"+player_amount_when_start+")"));
+
+        ItemStack bonusItem = new ItemStack(Material.GOLDEN_APPLE);
+        gameWorld.dropItemNaturally(player.getLocation(), bonusItem); // 황금사과 추가 지급
+
+        player.setGameMode(GameMode.SPECTATOR); // 관전모드 설정 (추후에 타 플러그인으로 로비 이동 구현)
+    }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
