@@ -35,7 +35,7 @@ public class timeManager { //TODO: 스코어보드 띄우기, 플레이어 죽�
             @Override
             public void run() {
                 if (times <= GatheringTime/TimeUnit.SECEND) { // 자원 모으는 시간일 때
-                    if (times % 60 == 59) { // 1 분마다
+                    if (times % 60 == 0) { // 1 분마다
                         world.sendMessage(Component.text("남은 시간은 " + (int) (GatheringTime/TimeUnit.SECEND - times) + "초 입니다"));
                     }
 
@@ -44,7 +44,7 @@ public class timeManager { //TODO: 스코어보드 띄우기, 플레이어 죽�
                         world.sendMessage(Component.text("이제 월드 보더가 점점 축소됩니다!"));
                     }
                 } else if (times <= (GatheringTime + PVPTime)/TimeUnit.SECEND) { // 싸우는 시간일 때
-                    if (times % 60 == 59) { // 1 분마다
+                    if (times % 60 == 0) { // 1 분마다
                         world.sendMessage(Component.text("남은 시간은 " + (int) ((GatheringTime+ PVPTime)/TimeUnit.SECEND - times) + "초 입니다"));
                     }
 
