@@ -49,11 +49,6 @@ public class event implements Listener {
                 resultMaterial = Material.COPPER_INGOT;
                 expToDrop = 1;
                 break;
-            case ANCIENT_DEBRIS:
-                // 고대 잔해는 일반적으로 행운의 영향을 받지 않음
-                resultMaterial = Material.NETHERITE_SCRAP;
-                expToDrop = 2;
-                break;
             default:
                 return;
         }
@@ -80,7 +75,7 @@ public class event implements Listener {
             block.getWorld().dropItemNaturally(block.getLocation(), dropItem);
 
             if (expToDrop > 0) {
-                block.getWorld().spawn(block.getLocation(), ExperienceOrb.class).setExperience(expToDrop);
+                block.getWorld().spawn(block.getLocation(), ExperienceOrb.class).setExperience(expToDrop * amount);
             }
         }
     }
