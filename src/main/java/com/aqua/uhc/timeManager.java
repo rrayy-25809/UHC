@@ -1,5 +1,6 @@
 package com.aqua.uhc;
 
+import org.bukkit.GameRules;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.potion.PotionEffect;
@@ -40,6 +41,7 @@ public class timeManager { //TODO: 스코어보드 띄우기, 플레이어 죽�
                     }
 
                     if (times == GatheringTime/TimeUnit.SECEND) {
+                        world.setGameRule(GameRules.PVP, true);
                         border.changeSize(16, PVPTime); // 마크 내에서 점차 줄어들게 설정, 대신 줄어들었을 때 다음 작업 실행은 불가
                         world.sendMessage(Component.text("이제 월드 보더가 점점 축소됩니다!"));
                     }

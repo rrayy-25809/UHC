@@ -2,3 +2,7 @@ name: UHC
 version: '1.0-SNAPSHOT'
 main: com.aqua.uhc.UHC
 api-version: '1.21'
+commands:
+  test:
+    description: ㅅㄷㄴㅅ
+    usage: ㄴㅅㄴㄷ
