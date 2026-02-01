@@ -19,9 +19,8 @@ public class timeManager { //TODO: 스코어보드 띄우기, 플레이어 죽�
     /**
      * @param plugin 플러그인
      * @param world 게임 실행할 월드
-     * @param GatheringTime
-     * @param PVPTime
-     * @param DeathmatchTime
+     * @param GatheringTime 자원 모으는 시간
+     * @param PVPTime 싸우는 시간
      */
     public timeManager(UHC plugin, World world, Long GatheringTime, Long PVPTime) {
         if (world==null) {
