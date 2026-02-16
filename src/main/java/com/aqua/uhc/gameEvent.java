@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.kyori.adventure.text.Component;
@@ -43,6 +44,19 @@ public class gameEvent implements Listener {
         gameWorld.dropItemNaturally(player.getLocation(), bonusItem); // 황금사과 추가 지급
 
         player.setGameMode(GameMode.SPECTATOR); // 관전모드 설정 (추후에 타 플러그인으로 로비 이동 구현)
+    }
+
+    @EventHandler
+    public void onPlayerPortal(PlayerPortalEvent event) {
+        Player player = event.getPlayer();
+        
+        // 네더 또는 엔더로 가려고 할 때 차단
+        if (event.getTo().getWorld().getEnvironment() == World.Environment.NETHER ||
+            event.getTo().getWorld().getEnvironment() == World.Environment.THE_END) {
+            
+            event.setCancelled(true);
+            player.sendMessage(Component.text("§c네더와 엔더는 금지되어 있습니다!"));
+        }
     }
 
     @EventHandler

@@ -11,18 +11,20 @@ import com.aqua.uhc.util.TimeUnit;
 
 import net.kyori.adventure.text.Component;
 
-public class timeManager { //TODO: 스코어보드 띄우기, 플레이어 죽음 감지, 추가되는 기능에 따라 클래스 이름 변경에 대해 고민하기
+public class timeManager {
     private UHC plugin;
     private BukkitRunnable GameRunnable;
     private Long times = 0L;
+    private GameScoreboard gameScoreboard;
 
     /**
      * @param plugin 플러그인
      * @param world 게임 실행할 월드
      * @param GatheringTime 자원 모으는 시간
      * @param PVPTime 싸우는 시간
+     * @param gameScoreboard 게임 스코어보드
      */
-    public timeManager(UHC plugin, World world, Long GatheringTime, Long PVPTime) {
+    public timeManager(UHC plugin, World world, Long GatheringTime, Long PVPTime, GameScoreboard gameScoreboard) {
         if (world==null) {
             throw new NullPointerException("world 변수는 null 일 수 없습니다.");
         }
@@ -30,10 +32,15 @@ public class timeManager { //TODO: 스코어보드 띄우기, 플레이어 죽�
         border.setCenter(0, 0);
         border.setSize(1000);
         this.plugin = plugin;
+        this.gameScoreboard = gameScoreboard;
 
         this.GameRunnable = new BukkitRunnable() {
             @Override
             public void run() {
+                if (times % 10 == 0) { // 10 초마다 스코어보드 업데이트
+                    gameScoreboard.updateScoreboard();
+                }
+                
                 if (times <= GatheringTime/TimeUnit.SECEND) { // 자원 모으는 시간일 때
                     if (times % 60 == 0) { // 1 분마다
                         world.sendMessage(Component.text("PVP시간까지 남은 시간은 " + (int) (GatheringTime/TimeUnit.SECEND - times)/60 + "분 입니다"));

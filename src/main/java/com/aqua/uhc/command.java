@@ -31,7 +31,7 @@ public class command implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         // 현재 로드된 모든 월드 정보를 로그에 출력
         worldManager.getLoadedWorlds().forEach(world -> {
-            this.plugin.getLogger().info("로드된 월드: " + world.getName());
+            this.plugin.getLogger().info("로드된 월드: " + world.getName()); // 로그 확인하니까 world, world__nether, world_the_end 도 출력됨
         });
         
         // 새로운 게임 월드 생성 요청 (비동기 작업)
@@ -62,8 +62,11 @@ public class command implements CommandExecutor {
             // 게임 이벤트 리스너 등록
             this.plugin.getServer().getPluginManager().registerEvents(new gameEvent(bukkitWorld), this.plugin);
             
+            // 게임 스코어보드 생성
+            GameScoreboard gameScoreboard = new GameScoreboard(plugin, bukkitWorld);
+            
             // 시간 관리자 생성 및 실행
-            timeManager timeManager = new timeManager(this.plugin, bukkitWorld, 15*TimeUnit.MINUTE, TimeUnit.HOUR);
+            timeManager timeManager = new timeManager(this.plugin, bukkitWorld, 15*TimeUnit.MINUTE, TimeUnit.HOUR, gameScoreboard);
             timeManager.run();
 
             // 명령어 실행자를 플레이어로 캐스팅하여 월드로 이동
