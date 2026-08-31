@@ -35,7 +35,7 @@ public class UHC extends JavaPlugin {
 
     private void hookMultiverse() {
         this.coreApi = MultiverseCoreApi.get();
-        Objects.requireNonNull(getCommand("test")).setExecutor(new command(this));
+        Objects.requireNonNull(getCommand("test")).setExecutor(new UHCCommand(this));
         getLogger().info("UHC 플러그인이 활성화 되었습니다!");
     }
 

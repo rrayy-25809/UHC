@@ -1,7 +1,11 @@
 package com.aqua.uhc.util;
 
 public interface TimeUnit {
-    public static final Long SECEND = 20L;
-    public static final Long MINUTE = 60 * SECEND;
-    public static final Long HOUR = 60 * MINUTE;
+    Long SECOND = 20L;
+    Long MINUTE = 60 * SECOND;
+    Long HOUR = 60 * MINUTE;
+
+    /** @deprecated 오타 호환용. {@link #SECOND}를 사용하세요. */
+    @Deprecated
+    Long SECEND = SECOND;
 }

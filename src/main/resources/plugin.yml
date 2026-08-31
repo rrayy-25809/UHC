@@ -1,7 +1,8 @@
 name: UHC
-version: '1.0-SNAPSHOT'
+version: '${version}'
 main: com.aqua.uhc.UHC
 api-version: '1.21'
+depend: [Multiverse-Core]
 commands:
   test:
     description: ㅅㄷㄴㅅ
